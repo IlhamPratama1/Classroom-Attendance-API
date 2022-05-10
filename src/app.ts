@@ -4,7 +4,7 @@ import cors from 'cors';
 
 import { NODE_ENV, PORT, ORIGIN, CREDENTIALS } from "./config";
 import { Routes } from "./interfaces";
-import { HomeRoute } from './routes';
+import { AuthRoute, HomeRoute, UserRoute } from './routes';
 import DB from '../src/databases';
 
 class App {
@@ -18,7 +18,9 @@ class App {
         this.env = NODE_ENV || 'development';
         this.port = PORT || 3000;
         this.routes = [
-            new HomeRoute()
+            new HomeRoute(),
+            new UserRoute(),
+            new AuthRoute()
         ];
 
         this.connectToDatabase();
