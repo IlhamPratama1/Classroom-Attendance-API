@@ -20,8 +20,3 @@ export interface UpdateUserData {
     email: string,
     deskripsi: string
 }
-
-export interface SignInData {
-    email: string,
-    password: string
-}

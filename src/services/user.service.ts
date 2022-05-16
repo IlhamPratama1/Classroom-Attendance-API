@@ -15,8 +15,8 @@ class UserService {
         if (findUser) throw new HttpException(409, `You're email ${userData.email} already exists`);
 
         const hashedPassword = await hash(userData.password, 10);
-        let path: string = '';
-        if (req.file) path = req.protocol + '://' + req.get('host') + "/static/images/" + req.file.filename; 
+        if (!req.file) throw new HttpException(400, "Please provide image");
+        let path = req.protocol + '://' + req.get('host') + "/static/images/" + req.file.filename; 
 
         const createUserData = await this.users.create({ ...userData, password: hashedPassword, picture: path });
         await createUserData.setRoleModels(userData.roles);

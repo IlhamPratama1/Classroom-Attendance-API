@@ -1,10 +1,19 @@
 import { Request, Response } from 'express';
 
 import { User, UserData } from '../interfaces';
+import { RequestWithUser } from '../interfaces/request.interface';
 import UserService from '../services/user.service';
 
 class UserController {
     private userService = new UserService();
+
+    public getUserDetail = async (req: RequestWithUser, res: Response) => {
+        try {
+            return res.status(200).send(req.user);
+        } catch (error) {
+            res.status(400).send({  'message': `${error}` });
+        }
+    }
 
     public getAllUser = async (req: Request, res: Response) => {
         try {

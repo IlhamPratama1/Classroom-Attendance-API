@@ -12,7 +12,7 @@ class AuthController {
             const user = await this.authService.signIn(userData);
             return res.status(200).send(user);
         } catch (error) {
-            return res.status(400).send({  'message': `${error}` });
+            return res.status(400).send({ 'message': `${error}` });
         }
     }
 }
