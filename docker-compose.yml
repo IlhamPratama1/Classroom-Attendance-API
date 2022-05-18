@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  classroom-attendance-database:
+    container_name: classroom-attendance-database
+    image: postgres:14.2-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=Ilham11pratama
+    volumes:
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - '5432:5432'
+  classroom-attendance-api-nodejs:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: base
+    volumes:
+      - ./src:/home/node/classroom-attendance-api-nodejs/src
+      - ./nodemon.json:/home/node/classroom-attendance-api-nodejs/nodemon.json
+    container_name: classroom-attendance-api-nodejs
+    depends_on:
+      - classroom-attendance-database
+    expose:
+      - '8000'
+    ports:
+      - '8000:8000'
+    command: npm run dev
