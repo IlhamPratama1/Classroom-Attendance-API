@@ -19,7 +19,6 @@ export class UserRoute implements Routes {
         this.router.get(`${this.path}id/:id`, this.roleMiddleware.checkIfManager, this.userController.getUserById);
         this.router.get(`${this.path}detail`, this.roleMiddleware.checkIfUser, this.userController.getUserDetail);
         this.router.post(`${this.path}create`, [
-            this.roleMiddleware.checkIAdmin,
             uploadImage
         ], this.userController.createUser);
         this.router.put(`${this.path}update/:id`, [

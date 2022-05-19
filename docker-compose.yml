@@ -9,6 +9,7 @@ services:
       - POSTGRES_PASSWORD=Ilham11pratama
     volumes:
       - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+      - classroom-attendance-data:/var/lib/postgresql/data
     ports:
       - '5432:5432'
   classroom-attendance-api-nodejs:
@@ -27,3 +28,6 @@ services:
     ports:
       - '8000:8000'
     command: npm run dev
+
+volumes:
+  classroom-attendance-data:

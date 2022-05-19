@@ -40,26 +40,7 @@ class App {
     }
 
     private connectToDatabase() {
-        DB.sequelize.sync({ force: true }).then(() => {
-            initializeData();
-        });
-
-        function initializeData() {
-            DB.Roles.bulkCreate([
-                {
-                    name: 'siswa'
-                },
-                {
-                    name: 'guru'
-                },
-                {
-                    name: 'admin'
-                },
-                {
-                    name: 'manager'
-                }
-            ]);
-        }
+        DB.sequelize.sync({ force: false });
     }
 
     private initializeMiddlewares() {
